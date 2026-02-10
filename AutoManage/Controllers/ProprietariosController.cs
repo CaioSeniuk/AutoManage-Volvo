@@ -5,7 +5,7 @@ using AutoManage.Models;
 
 namespace AutoManage.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ProprietariosController : ControllerBase
     {
