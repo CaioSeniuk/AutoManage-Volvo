@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoManage.Validation
 {
-    /// <summary>
+
     /// Elo da corrente responsável por verificar a integridade do Proprietário.
-    /// </summary>
     public class ProprietarioExistenteHandler : VeiculoHandler
     {
         public ProprietarioExistenteHandler(AutoManageContext context) : base(context) { }

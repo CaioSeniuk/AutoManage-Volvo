@@ -28,7 +28,17 @@ Para evitar controladores inchados e lógica condicional complexa (`if/else`), i
 *   **Funcionamento:** A requisição passa por uma corrente de validadores (`ChassiUnicoHandler` -> `ProprietarioExistenteHandler`). Se algum falhar, a execução é interrompida imediatamente (Fail Fast).
 *   **Benefício:** Permite adicionar novas regras de negócio (ex: validação de ano de fabricação) sem alterar o código existente do Controller.
 
-### 2. Entity Framework Core (Dados)
+### 2. Autenticação e Segurança (JWT)
+Implementação de um sistema completo de autenticação e autorização, garantindo que apenas usuários autenticados acessem os recursos sensíveis.
+
+*   **Autenticação JWT:** Sistema baseado em tokens JSON Web Token, configurado com validação estrita de Issuer, Audience e SecretKey, com expiração padrão de 24 horas.
+*   **Gestão de Usuários:** Endpoints dedicados para Registro (`/register`) e Login (`/login`), utilizando DTOs específicos (`LoginRequest`, `RegisterRequest`) para transferência segura de dados.
+*   **Segurança de Dados:** Utilização do **BCrypt.Net-Next** para hashing robusto de senhas. Credenciais nunca são armazenadas em texto plano.
+*   **Injeção de Dependência:** Lógica de autenticação desacoplada através da interface `IAuthService`, facilitando manutenção e testes unitários.
+*   **Proteção Global:** Controladores principais protegidos com o atributo `[Authorize]`, exigindo token Bearer.
+*   **Swagger Integration:** Interface configurada para suportar o fluxo de autenticação (botão "Authorize"), permitindo testar endpoints protegidos diretamente pelo navegador.
+
+### 3. Entity Framework Core (Dados)
 Utilizamos Migrations para versionamento do esquema do banco de dados, garantindo que a evolução do código C# seja refletida de forma segura no SQL Server.
 *   Relacionamentos configurados via Fluent API (`AutoManageContext.cs`).
 *   Uso de `Include` para Eager Loading (evitando queries N+1).
@@ -48,8 +58,16 @@ Utilizamos Migrations para versionamento do esquema do banco de dados, garantind
     cd projeto-final-volvo
     ```
 
-2.  **Configure a String de Conexão:**
-    Edite o arquivo `AutoManage/appsettings.json` se necessário. O padrão geralmente aponta para o LocalDB.
+2.  **Configure o Banco de Dados conforme seu ambiente:**
+    O projeto está preparado para rodar tanto em **Windows** (via LocalDB) quanto em **macOS/Linux** (via Docker).
+
+    *   **No Windows:**
+        - Verifique se o `LocalDB` está instalado.
+        - No arquivo `Program.cs`, certifique-se que a variável `connectionString` use `"DefaultConnection"`.
+    *   **No macOS (Docker):**
+        - Suba um container SQL Server (ex: `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=YourStrong@Passw0rd" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest`).
+        - No arquivo `Program.cs`, a variável `connectionString` deve usar `"DockerConnection"`.
+        - Verifique a senha no `appsettings.json`.
 
 3.  **Aplique as Migrations (Cria o Banco):**
     ```bash

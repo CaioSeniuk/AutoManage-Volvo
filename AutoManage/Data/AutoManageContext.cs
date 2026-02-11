@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using AutoManage.Models;
 
 namespace AutoManage.Data
@@ -24,11 +24,19 @@ namespace AutoManage.Data
         public DbSet<Peca> Pecas { get; set; }
         public DbSet<PedidoPeca> PedidosPecas { get; set; }
         public DbSet<ItemPedidoPeca> ItensPedidoPeca { get; set; }
+        
+        // autenticacao
+        public DbSet<Usuario> Usuarios { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // configuracao de usuario
+            modelBuilder.Entity<Usuario>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
 
             // configuracao de relacionamentos e indices
 

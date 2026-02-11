@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace AutoManage.Models
+namespace AutoManage.Models.User
 {
     /// <summary>
     /// representa um proprietario de veiculo
