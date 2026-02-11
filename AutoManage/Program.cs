@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Configuração do Banco de Dados (SQL Server)
 // Para Windows (LocalDB): Use "DefaultConnection"
 // Para macOS/Linux (Docker): Use "DockerConnection"
-var connectionString = builder.Configuration.GetConnectionString("DockerConnection"); 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); 
 
 builder.Services.AddDbContext<AutoManageContext>(options =>
     options.UseSqlServer(connectionString));
