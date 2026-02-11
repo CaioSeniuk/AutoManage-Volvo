@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using AutoManage.Data;
 using AutoManage.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoManage.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize] // Requer autenticação JWT
     public class PecasController : ControllerBase
     {
         private readonly AutoManageContext _context;

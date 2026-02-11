@@ -4,11 +4,13 @@ using AutoManage.Data;
 using AutoManage.Models;
 using AutoManage.Validation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoManage.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize] // Requer autenticação JWT
     public class VeiculosController : ControllerBase
     {
         private readonly AutoManageContext _context;
