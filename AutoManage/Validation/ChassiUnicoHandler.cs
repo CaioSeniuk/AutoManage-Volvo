@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoManage.Validation
 {
-    /// <summary>
+    
     /// Elo da corrente responsável por verificar se o Chassi é único no banco de dados.
-    /// </summary>
     public class ChassiUnicoHandler : VeiculoHandler
     {
         public ChassiUnicoHandler(AutoManageContext context) : base(context) { }

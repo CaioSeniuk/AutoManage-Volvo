@@ -48,8 +48,16 @@ Utilizamos Migrations para versionamento do esquema do banco de dados, garantind
     cd projeto-final-volvo
     ```
 
-2.  **Configure a String de Conexão:**
-    Edite o arquivo `AutoManage/appsettings.json` se necessário. O padrão geralmente aponta para o LocalDB.
+2.  **Configure o Banco de Dados conforme seu ambiente:**
+    O projeto está preparado para rodar tanto em **Windows** (via LocalDB) quanto em **macOS/Linux** (via Docker).
+
+    *   **No Windows:**
+        - Verifique se o `LocalDB` está instalado.
+        - No arquivo `Program.cs`, certifique-se que a variável `connectionString` use `"DefaultConnection"`.
+    *   **No macOS (Docker):**
+        - Suba um container SQL Server (ex: `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=YourStrong@Passw0rd" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest`).
+        - No arquivo `Program.cs`, a variável `connectionString` deve usar `"DockerConnection"`.
+        - Verifique a senha no `appsettings.json`.
 
 3.  **Aplique as Migrations (Cria o Banco):**
     ```bash
