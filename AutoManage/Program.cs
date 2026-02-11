@@ -3,9 +3,13 @@ using AutoManage.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicionar DbContext com SQL Server
+// Configuração do Banco de Dados (SQL Server)
+// Para Windows (LocalDB): Use "DefaultConnection"
+// Para macOS/Linux (Docker): Use "DockerConnection"
+var connectionString = builder.Configuration.GetConnectionString("DockerConnection"); 
+
 builder.Services.AddDbContext<AutoManageContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 // Adicionar controllers
 builder.Services.AddControllers();
