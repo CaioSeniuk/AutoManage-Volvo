@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AutoManage.Models
 {
@@ -16,6 +17,7 @@ namespace AutoManage.Models
 
         [Required]
         [StringLength(18)]
+        [JsonPropertyName("cpfCnpj")]
         public string CPF_CNPJ { get; set; } = string.Empty;
 
         [StringLength(200)]

@@ -10,7 +10,7 @@ namespace AutoManage.Models
     {
         [Key]
         [StringLength(17)]
-        public string Chassi { get; set; } = string.Empty;
+        public string Chassi { get; set; } = Guid.NewGuid().ToString("N").Substring(0, 17).ToUpper();
 
         [Required]
         [StringLength(100)]
@@ -22,9 +22,8 @@ namespace AutoManage.Models
         [StringLength(30)]
         public string? Cor { get; set; }
 
-        [Required]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Valor { get; set; }
+        public decimal Valor { get; set; } = 0;
 
         public int Quilometragem { get; set; }
 
